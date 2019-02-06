@@ -15,7 +15,7 @@ import datadog.api
 import pytz
 import yaml
 
-import dogpush.bcolors as bcolors
+import bcolors
 
 
 PROGNAME = 'dogpush'
@@ -58,7 +58,7 @@ SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 
 # Datadog fields we do not store locally.
 IGNORE_FIELDS = ['created_at', 'created', 'modified', 'creator',
-                 'org_id', 'overall_state', 'id', 'deleted',
+                 'org_id', 'overall_state', 'deleted',
                  'matching_downtimes', 'overall_state_modified',
                  # dogpush specific:
                  'mute_when', 'team', 'severity']
@@ -98,7 +98,6 @@ def _canonical_monitor(original, default_team=None, **kwargs):
     for field in IGNORE_OPTIONS:
         m.get('options', {}).pop(field, None)
     option_defaults = { **DATADOG_DEFAULT_OPTIONS, **CONFIG['default_rule_options'] }
-    print(option_defaults)
     for (field, value) in option_defaults.items():
         if m.get('options', {}).get(field) == value:
             del m['options'][field]
