@@ -256,6 +256,7 @@ def command_push(args):
     if only_local:
         print("Pushing %d new monitors." % len(only_local))
         for name in only_local:
+            print('\t' + name)
             datadog.api.Monitor.create(**_prepare_monitor(local_monitors[name]))
 
     common_names = set(local_monitors.keys()) & set(remote_monitors.keys())
